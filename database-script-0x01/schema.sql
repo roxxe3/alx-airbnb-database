@@ -8,12 +8,12 @@ create TABLE USER (
     role ENUM('guest', 'host', 'admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX(user_id),
-    INDEX(email),
+    INDEX(email)
 );
 
 CREATE TABLE PROPERTY (
     property_id CHAR(36) PRIMARY KEY,
-    host_id CHAR(36)
+    host_id CHAR(36),
     Foreign Key (host_id) REFERENCES User(user_id),
     name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
@@ -69,6 +69,6 @@ CREATE TABLE MESSAGE (
     message_body TEXT NOT NULL,
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (sender_id) REFERENCES User(user_id),
-    FOREIGN KEY (receiver_id) REFERENCES User(user_id),
+    FOREIGN KEY (recipient_id) REFERENCES User(user_id),
     INDEX(message_id)
 );
